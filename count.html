@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">新年倒计时！</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+        *{
+           transition: 0.3s ease; 
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: #000000;
+            text-align: center;
+            overflow: hidden;
+        }
+        #timer{
+            width: 100vw;
+            margin: auto;
+            margin-top: 50vh;
+            transform: translate(0, -50%);
+            font-family: "Poppins";
+            color: #ffffff;
+            font-size: 72px;
+            word-break: break-all;
+        }
+        #latency{
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            margin: 0;
+            font-family: "Poppins";
+            color: #ffffff;
+            font-size: 12px;
+        }
+        ::selection{
+            color: #000000;
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body id="body">
+    <h1 id="timer">Loading...</h1>
+    <p id="latency"></p>
+    <audio id="audio" src="./fireworks.mp3"></audio>
+    <script>
+        // 设置
+        // var countTo = new Date(1622233800000);
+        // var countTo = new Date(1622138700000);
+        // var countTo = new Date(1634400000000);
+        // var countTo = new Date(1641016800000);
+        var countTo = new Date(1643695200000);
+        var countTo = new Date(1643685800000);
+        // 加载
+        const body = document.getElementById("body");
+        const timer = document.getElementById("timer");
+        const latency = document.getElementById("latency");
+        const audio = document.getElementById("audio");
+        const title = document.getElementById("title");
+        var intervalTimer = null;
+        // var test = [];
+        // 因浏览器音频播放限制 请求用户输入
+        var warning = " | 请点击此处以授权音频权限"
+        latency.onclick = function(){
+            audio.play().then(function(){
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            warning = "";
+            latency.innerHTML = "授权成功，谢了！";
+        }
+        // 补0
+        function getDisplay(input){
+            if (input < 10) {
+                return "0" + input;
+            }else{
+                return input;
+            }
+        }
+        // 获取需要显示的文字的方法
+        function getText(time){
+            var text = "";
+            var distance = countTo.getTime() - time.getTime();
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.round((distance % (1000 * 60)) / 1000);
+            console.log((distance % (1000 * 60)) / 1000);
+            if (days > 0){
+                text += getDisplay(days) + ":";
+                text += getDisplay(hours) + ":";
+                text += getDisplay(minutes) + ":";
+                text += getDisplay(seconds);
+            }else if (hours > 0){
+                text += getDisplay(hours) + ":";
+                text += getDisplay(minutes) + ":";
+                text += getDisplay(seconds);
+            }else if (minutes > 0){
+                text += getDisplay(minutes) + ":";
+                text += getDisplay(seconds);
+            }else if (seconds > 0){
+                text += getDisplay(seconds);
+            }else if (seconds == 0){
+                amazingFunction();
+            }else{
+                console.log("still calling");
+                return "";
+            }
+            return text;
+        }
+        function amazingFunction(){
+            clearInterval(intervalTimer);
+            // body.style.backgroundColor = "#ffffff";
+            body.style.backgroundColor = "#aa381e";
+            timer.style.color = "#FFDF00";
+            // latency.style.color = "#000000";
+            title.innerHTML = "过年好！！！";
+            setTimeout(function(){
+                timer.innerHTML = "虎年大吉!";
+            }, 0);
+            audio.play();
+            // setInterval(function(){
+            //     ohhText += "H";
+            //     timer.innerHTML = ohhText;
+            // }, 25)
+        }
+        // 主程序
+        window.onload = function(){
+            timer.innerHTML = "Adjusting...";
+            if ((countTo.getTime() - new Date().getTime()) < 0){
+                timer.style.fontSize = "48px";
+                timer.innerHTML = "计时已结束，或尚没有正在进行的计时";
+                return;
+            }
+            // 与系统整秒时间校准
+            setTimeout(function(){
+                timer.innerHTML = "Waiting...";
+                intervalTimer = setInterval(function(){
+                    // 每次刷新更新文字
+                    var time = new Date();
+                    timer.innerHTML = getText(time);
+                    // 计算与系统时间的误差
+                    if (time.getMilliseconds() < 500){
+                        latency.innerHTML = "Local Latency: " + time.getMilliseconds() + "ms" + warning;
+                    }else{
+                        latency.innerHTML = "*Local Latency: " + (1000 - time.getMilliseconds()) + "ms" + warning;
+                    }
+                }, 1000);
+            // 校准，并给出5毫秒预计计算延迟时间以增加准度
+            // 根据测试，10毫秒可能会更接近预计平均计算延迟，但5毫秒几乎是最低延迟，所以添加没有任何坏处
+            }, 995 - new Date().getMilliseconds());
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- 
+    var distanceDate = new Date(countTo.getTime() - (Math.round(time.getTime() / 1000) * 1000));
+    // if ((countTo.getHours() - time.getHours()) > 0){
+    //     // 特别特别奇怪的bug，一直要加18小时，写个注释纪念一下
+    //     // 掉了半头的头发吧也就
+    //     text += countTo.getHours() - time.getHours() + ":";
+    //     text += distanceDate.getMinutes() + ":";
+    //     text += distanceDate.getSeconds();
+    // }
+    // if (countTo.getFullYear() - time.getFullYear() > 0){
+    //     text += (countTo.getFullYear() - time.getFullYear()) + ":";
+    //     text += (countTo.getMonth() - time.getMonth()) + ":";
+    //     text += (countTo.getDate() - time.getDate()) + ":";
+    //     text += (distanceDate.getUTCHours() - 5) + ":";
+    //     text += distanceDate.getMinutes() + ":";
+    //     text += distanceDate.getSeconds();
+    // }else if (countTo.getMonth() - time.getMonth() > 0){
+    //     text += (countTo.getMonth() - time.getMonth()) + ":";
+    //     text += (countTo.getDate() - time.getDate()) + ":";
+    //     text += (distanceDate.getUTCHours() - 5) + ":";
+    //     text += distanceDate.getMinutes() + ":";
+    //     text += distanceDate.getSeconds();
+    // }else if (countTo.getDate() - time.getDate() > 0){
+    //     text += (countTo.getDate() - time.getDate()) + ":";
+    //     text += (distanceDate.getUTCHours() - 5) + ":";
+    //     text += distanceDate.getMinutes() + ":";
+    //     text += distanceDate.getSeconds();
+    // }
+    if (distanceDate.getMinutes() > 0){
+        text += distanceDate.getMinutes() + ":";
+        text += distanceDate.getSeconds();
+    }else if (distanceDate.getSeconds > 0){
+        text += distanceDate.getSeconds();
+    }else{
+        text = "计时已结束，或尚没有正在进行的计时";
+    }
+-->
