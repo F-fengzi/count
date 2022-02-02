@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I hate it when people don"t enable JavaScript</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+        * {
+            text-align: center;
+            font-family: "Poppins", sans-serif;
+            cursor: default;
+        }
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            opacity: 0;
+            transition: 0.8s;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            padding-top: 30vh;
+            box-sizing: border-box;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            transition: 8s;
+            margin: 0;
+            font-size: 6em;
+            line-height: 0.7em;
+        }
+        p {
+            margin-top: 50px;
+        }
+        span {
+            transition: 8s ease-in;
+            color: transparent;
+        }
+    </style>
+</head>
+<body onclick="not()">
+    <h1>It's Fengzi.</h1>
+    <p>New website <span>NOT</span> coming soon™.</p>
+    <script>
+        document.getElementsByTagName("title")[0].innerText = "Hey!";
+        window.onload = function(){
+            document.getElementsByTagName("body")[0].style.opacity = "100";
+        }
+        function not(){
+            document.getElementsByTagName("span")[0].style.color = "#000000";
+            setTimeout(function(){
+                document.getElementsByTagName("span")[0].style.fontSize = "10em";
+                document.getElementsByTagName("h1")[0].style.fontSize = "3em";
+                setTimeout(function(){
+                    document.getElementsByTagName("span")[0].style.transition = "0.5s ease";
+                    document.getElementsByTagName("p")[0].style.letterSpacing = "1em";
+                }, 10000);
+            }, 8000);
+        }
+    </script>
+</body>
+</html>
