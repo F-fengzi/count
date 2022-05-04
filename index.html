@@ -7,31 +7,73 @@
     <title>I hate it when people don't enable JavaScript</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+        :root {
+            --background-color: #f8f8f8;
+            --text-color: #000000;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #000000;
+                --text-color: #f8f8f8;
+            }
+        }
         body {
             opacity: 0;
             transition: 0.8s;
-            padding-top: 25vh;
-            background-color: #f8f8f8;
+            padding-top: 17.5vh;
+            color: var(--text-color);
+            background-color: var(--background-color);
             text-align: center;
             font-family: "Poppins", sans-serif;
             cursor: default;
         }
-        h1 {
+        .hspacer {
+            width: 100%;
+            height: 1em;
+        }
+        .vspacer {
+            display: inline-block;
+            width: 3em;
+            height: 100%;
+        }
+        .title {
             font-size: 6em;
             line-height: 0.7em;
         }
-        span {
+        .hidden {
             transition: 10s ease-in;
             color: transparent;
         }
+        .links {
+            margin: auto;
+            width: 22.5em;
+            max-width: 80vw;
+            display: flex;
+            justify-content: space-around;
+        }
+        a {
+            font-size: xx-large;
+            color: var(--text-color);
+            text-decoration: none;
+            background: linear-gradient(to right, transparent, transparent), linear-gradient(to right, darkviolet, violet);
+            background-size: 100% 6px, 0 6px;
+            background-position: 100% 100%, 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.2s ease;
+        }
+        a:hover {
+            background-size: 0 3px, 100% 6px;
+        }
     </style>
 </head>
-<body onclick="document.querySelector('span').style.color = '#000000'">
-    <h1>It's Fengzi.</h1>
-    <p>New website <span>NOT</span> coming soon™.</p>
+<body onclick="document.querySelector('.hidden').style.color = '#000000'">
+    <h1 class="title">It's Fengzi.</h1>
+    <p class="slogan">New website <span class="hidden">NOT</span> coming soon™.</p>
+    <div class="hspacer"></div>
+    <div class="links"><a href="https://status.fengzi.ga">Status</a><a href="https://blogs.fengzi.ga/">Blogs</a></div>
     <script>
-        parseInt(Math.random()*10) == 0 ? document.querySelector("title").innerText = "Quack!" : document.querySelector("title").innerText = "Hey!";
-        window.onload = () => document.querySelector("body").style.opacity = "100";
+        parseInt(Math.random()*10) == 0 ? document.title = "Quack!" : document.title = "Hey!";
+        window.onload = () => document.body.style.opacity = "100";
     </script>
 </body>
 </html>
