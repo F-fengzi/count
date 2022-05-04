@@ -66,7 +66,7 @@
         }
     </style>
 </head>
-<body onclick="document.querySelector('.hidden').style.color = '#000000'">
+<body>
     <h1 class="title">It's Fengzi.</h1>
     <p class="slogan">New website <span class="hidden">NOT</span> coming soon™.</p>
     <div class="hspacer"></div>
@@ -74,6 +74,7 @@
     <script>
         parseInt(Math.random()*10) == 0 ? document.title = "Quack!" : document.title = "Hey!";
         window.onload = () => document.body.style.opacity = "100";
+        window.onclick = () => document.querySelector('.hidden').style.color = "var(--text-color)";
     </script>
 </body>
 </html>
