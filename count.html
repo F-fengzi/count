@@ -65,8 +65,8 @@
 
         // 因浏览器音频播放限制 请求用户输入
         var warning = " | 请点击此处以授予音频权限";
-        latency.onclick = function(){
-            audio.play().then(function(){
+        latency.onclick = () => {
+            audio.play().then(() => {
                 audio.pause();
                 audio.currentTime = 0;
             });
@@ -127,14 +127,14 @@
                 timer.innerHTML = "新春快乐，兔年吉祥！";
             }, 0);
             audio.play();
-            // setInterval(function(){
+            // setInterval(() => {
             //     ohhText += "H";
             //     timer.innerHTML = ohhText;
-            // }, 25)
+            // }, 25);
         }
 
         // 主程序
-        window.onload = function(){
+        window.onload = () => {
             timer.innerHTML = "Adjusting...";
             if ((countTo.getTime() - new Date().getTime()) < 0){
                 timer.style.fontSize = "48px";
@@ -142,17 +142,17 @@
                 return;
             }
             // 与系统整秒时间校准
-            setTimeout(function(){
+            setTimeout(() => {
                 timer.innerHTML = "Waiting...";
-                intervalTimer = setInterval(function(){
+                intervalTimer = setInterval(() => {
                     // 每次刷新更新文字
                     const time = new Date();
                     timer.innerHTML = getText(time);
                     // 计算与系统时间的误差
                     if (time.getMilliseconds() < 500){
-                        latency.innerHTML = "Local Latency: -" + time.getMilliseconds() + "ms" + warning;
+                        latency.innerHTML = `Latency: -${time.getMilliseconds()}ms${warning}`;
                     }else{
-                        latency.innerHTML = "Local Latency: " + (1000 - time.getMilliseconds()) + "ms" + warning;
+                        latency.innerHTML = `Latency: ${1000 - time.getMilliseconds()}ms${warning}`;
                     }
                 }, 1000);
             // 校准，并给出5毫秒预计计算延迟时间以增加准度
