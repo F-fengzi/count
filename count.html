@@ -53,13 +53,7 @@
     <audio id="audio" src="./fireworks.mp3"></audio>
     <script>
         // 设置
-        // var countTo = new Date(1622233800000);
-        // var countTo = new Date(1622138700000);
-        // var countTo = new Date(1634400000000);
-        // var countTo = new Date(1641016800000);
-        // var countTo = new Date(1643695200000);
-        // var countTo = new Date(2023, 0, 22);
-        var countTo = new Date(1672552800000);
+        var countTo = new Date(2023, 0, 22);
 
         // 加载
         const body = document.getElementById("body");
@@ -68,17 +62,16 @@
         const audio = document.getElementById("audio");
         const title = document.getElementById("title");
         var intervalTimer = null;
-        // var test = [];
 
         // 因浏览器音频播放限制 请求用户输入
-        var warning = " | 请点击此处以授予音频权限"
+        var warning = " | 请点击此处以授予音频权限";
         latency.onclick = function(){
             audio.play().then(function(){
                 audio.pause();
                 audio.currentTime = 0;
             });
             warning = "";
-            latency.innerHTML = "授权成功，谢了！";
+            latency.innerHTML = "授权成功！";
         }
 
         // 补0
@@ -92,12 +85,12 @@
 
         // 获取需要显示的文字的方法
         function getText(time){
-            var text = "";
-            var distance = countTo.getTime() - time.getTime();
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.round((distance % (1000 * 60)) / 1000);
+            let text = "";
+            const distance = countTo.getTime() - time.getTime();
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.round((distance % (1000 * 60)) / 1000);
             console.log((distance % (1000 * 60)) / 1000);
             if (days > 0){
                 text += getDisplay(days) + ":";
@@ -116,7 +109,7 @@
             }else if (seconds == 0){
                 amazingFunction();
             }else{
-                console.log("still calling");
+                console.log("[WARNING] Still calling");
                 return "";
             }
             return text;
@@ -129,9 +122,9 @@
             timer.style.color = "#FFDF00";
             // latency.style.color = "#000000";
             latency.style.display = "none";
-            title.innerHTML = "新年快乐";
+            title.innerHTML = "过年啦！";
             setTimeout(function(){
-                timer.innerHTML = "2023!";
+                timer.innerHTML = "新春快乐，兔年吉祥！";
             }, 0);
             audio.play();
             // setInterval(function(){
@@ -145,7 +138,7 @@
             timer.innerHTML = "Adjusting...";
             if ((countTo.getTime() - new Date().getTime()) < 0){
                 timer.style.fontSize = "48px";
-                timer.innerHTML = "计时已结束，或尚没有正在进行的计时";
+                timer.innerHTML = "计时已结束！";
                 return;
             }
             // 与系统整秒时间校准
@@ -153,13 +146,13 @@
                 timer.innerHTML = "Waiting...";
                 intervalTimer = setInterval(function(){
                     // 每次刷新更新文字
-                    var time = new Date();
+                    const time = new Date();
                     timer.innerHTML = getText(time);
                     // 计算与系统时间的误差
                     if (time.getMilliseconds() < 500){
-                        latency.innerHTML = "Local Latency: " + time.getMilliseconds() + "ms" + warning;
+                        latency.innerHTML = "Local Latency: -" + time.getMilliseconds() + "ms" + warning;
                     }else{
-                        latency.innerHTML = "*Local Latency: " + (1000 - time.getMilliseconds()) + "ms" + warning;
+                        latency.innerHTML = "Local Latency: " + (1000 - time.getMilliseconds()) + "ms" + warning;
                     }
                 }, 1000);
             // 校准，并给出5毫秒预计计算延迟时间以增加准度
@@ -169,41 +162,3 @@
     </script>
 </body>
 </html>
-
-<!-- 
-    var distanceDate = new Date(countTo.getTime() - (Math.round(time.getTime() / 1000) * 1000));
-    // if ((countTo.getHours() - time.getHours()) > 0){
-    //     // 特别特别奇怪的bug，一直要加18小时，写个注释纪念一下
-    //     // 掉了半头的头发吧也就
-    //     text += countTo.getHours() - time.getHours() + ":";
-    //     text += distanceDate.getMinutes() + ":";
-    //     text += distanceDate.getSeconds();
-    // }
-    // if (countTo.getFullYear() - time.getFullYear() > 0){
-    //     text += (countTo.getFullYear() - time.getFullYear()) + ":";
-    //     text += (countTo.getMonth() - time.getMonth()) + ":";
-    //     text += (countTo.getDate() - time.getDate()) + ":";
-    //     text += (distanceDate.getUTCHours() - 5) + ":";
-    //     text += distanceDate.getMinutes() + ":";
-    //     text += distanceDate.getSeconds();
-    // }else if (countTo.getMonth() - time.getMonth() > 0){
-    //     text += (countTo.getMonth() - time.getMonth()) + ":";
-    //     text += (countTo.getDate() - time.getDate()) + ":";
-    //     text += (distanceDate.getUTCHours() - 5) + ":";
-    //     text += distanceDate.getMinutes() + ":";
-    //     text += distanceDate.getSeconds();
-    // }else if (countTo.getDate() - time.getDate() > 0){
-    //     text += (countTo.getDate() - time.getDate()) + ":";
-    //     text += (distanceDate.getUTCHours() - 5) + ":";
-    //     text += distanceDate.getMinutes() + ":";
-    //     text += distanceDate.getSeconds();
-    // }
-    if (distanceDate.getMinutes() > 0){
-        text += distanceDate.getMinutes() + ":";
-        text += distanceDate.getSeconds();
-    }else if (distanceDate.getSeconds > 0){
-        text += distanceDate.getSeconds();
-    }else{
-        text = "计时已结束，或尚没有正在进行的计时";
-    }
--->
