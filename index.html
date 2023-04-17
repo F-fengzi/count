@@ -77,5 +77,22 @@
         <button id="go" onclick="window.open('https://www.spacex.com/launches/mission/?missionId=starship-flight-test')">Go</button>
     </div>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+        const button = document.getElementById("go");
+        let interval = null;
+        button.onmousedown = () => {
+            clearInterval(interval);
+            let arrows = "";
+            interval = setInterval(() => {
+                if (arrows.length < 4) arrows += ">";
+                else arrows = "";
+                button.innerHTML = "Go " + arrows;
+            }, 175);
+        }
+        document.onmouseup = () => {
+            clearInterval(interval);
+            button.innerHTML = "Go";
+        }
+    </script>
 </body>
 </html>
