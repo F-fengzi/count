@@ -4,78 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Per aspera ad astra.</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Fengzi Lab - Under construction.</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
-        * {
-            transition: 0.3s;
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+        :root {
+            --background-color: #f8f8f8;
+            --text-color: #000000;
         }
-        html {
-            width: 100%;
-            height: 100%;
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #24292e;
+                --text-color: #f8f8f8;
+            }
         }
         body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
+            opacity: 0;
+            transition: 0.7s;
+            padding-top: calc(30vh - 3em);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            text-align: center;
+            font-family: "Poppins", sans-serif;
+            cursor: default;
         }
-        #main {
+        .hspacer {
+            width: 100%;
+            height: 1em;
+        }
+        .vspacer {
+            display: inline-block;
+            width: 3em;
+            height: 100%;
+        }
+        .title {
+            padding-left: 0.1em;
+            font-size: 6em;
+            font-weight: 800;
+            line-height: 0.7em;
+        }
+        .links {
+            margin: auto;
+            width: 20em;
+            max-width: 80vw;
+            font-weight: 800;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            margin: auto auto;
+            justify-content: space-around;
         }
-        .twitter-tweet {
-            margin-top: 0 !important;
-            margin-bottom: 30px;
+        a {
+            font-size: 2em;
+            color: var(--text-color);
+            text-decoration: none;
+            background: linear-gradient(to right, transparent, transparent), linear-gradient(to right, darkviolet, violet);
+            background-size: 100% 6px, 0 6px;
+            background-position: 100% 100%, 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.2s ease;
         }
-        #go {
-            width: 100%;
-            max-width: min(550px, 90%);
-            height: 60px;
-            color: #ffffff;
-            background-color: #000000;
-            font-family: "Poppins";
-            font-size: 22px;
-            font-weight: 500;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            box-shadow: 0px 10px 15px #24292e80;
+        a:hover {
+            background-size: 0 3px, 100% 6px;
         }
-        #go:hover {
-            background-color: #24292e;
-        }
-        #go:active {
-            color: #24292e;
-            background-color: #f8f8f8;
-            border-color: #24292e;
-            border-radius: 0;
-            box-shadow: 0px 1px 7px #24292e80;
-        }
-        @media screen and (max-height: 900px) {
-            #main {
-                justify-content: flex-start;
-            }
-            .twitter-tweet {
-                padding: 30px 0 120px 0;
-            }
-            #go {
-                position: fixed;
-                bottom: 30px;
-            }
+        ::selection {
+            color: #a44eed;
+            background-color: transparent;
         }
     </style>
 </head>
 <body>
-    <div id="main">
-        <blockquote class="twitter-tweet" data-lang="en" data-dnt="true" data-theme="light"><p lang="en" dir="ltr">Exodus <a href="https://twitter.com/hashtag/spacex?src=hash&amp;ref_src=twsrc%5Etfw">#spacex</a> <a href="https://twitter.com/hashtag/space?src=hash&amp;ref_src=twsrc%5Etfw">#space</a> <a href="https://twitter.com/hashtag/starbase?src=hash&amp;ref_src=twsrc%5Etfw">#starbase</a> <a href="https://twitter.com/hashtag/starship?src=hash&amp;ref_src=twsrc%5Etfw">#starship</a> <a href="https://t.co/Pj06piKUwY">pic.twitter.com/Pj06piKUwY</a></p>&mdash; The Daily Hopper (@daily_hopper) <a href="https://twitter.com/daily_hopper/status/1647583098694176768?ref_src=twsrc%5Etfw">April 16, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        <button id="go" onclick="window.open('https://www.spacex.com/launches/mission/?missionId=starship-flight-test')">Go</button>
+    <h1 class="title">It's Fengzi.</h1>
+    <div class="hspacer"></div>
+    <div class="links">
+        <a href="https://github.com/F-fengzi">GitHub</a>
+        <div class="vspacer"></div>
+        <a href="https://status.fengzi.dev">Status</a>
     </div>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+        window.onload = () => document.body.style.opacity = "100";
+    </script>
 </body>
 </html>

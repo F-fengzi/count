@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per aspera ad astra.</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+        * {
+            transition: 0.3s;
+        }
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        #main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            margin: auto auto;
+        }
+        .twitter-tweet {
+            margin-top: 0 !important;
+            margin-bottom: 30px;
+        }
+        #go {
+            width: 100%;
+            max-width: min(550px, 90%);
+            height: 60px;
+            color: #ffffff;
+            background-color: #000000;
+            font-family: "Poppins";
+            font-size: 22px;
+            font-weight: 500;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            box-shadow: 0px 10px 15px #24292e80;
+        }
+        #go:hover {
+            background-color: #24292e;
+        }
+        #go:active {
+            color: #24292e;
+            background-color: #f8f8f8;
+            border-color: #24292e;
+            border-radius: 0;
+            box-shadow: 0px 1px 7px #24292e80;
+        }
+        @media screen and (max-height: 900px) {
+            #main {
+                justify-content: flex-start;
+            }
+            .twitter-tweet {
+                padding: 30px 0 120px 0;
+            }
+            #go {
+                position: fixed;
+                bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <blockquote class="twitter-tweet" data-lang="en" data-dnt="true" data-theme="light"><p lang="en" dir="ltr">Exodus <a href="https://twitter.com/hashtag/spacex?src=hash&amp;ref_src=twsrc%5Etfw">#spacex</a> <a href="https://twitter.com/hashtag/space?src=hash&amp;ref_src=twsrc%5Etfw">#space</a> <a href="https://twitter.com/hashtag/starbase?src=hash&amp;ref_src=twsrc%5Etfw">#starbase</a> <a href="https://twitter.com/hashtag/starship?src=hash&amp;ref_src=twsrc%5Etfw">#starship</a> <a href="https://t.co/Pj06piKUwY">pic.twitter.com/Pj06piKUwY</a></p>&mdash; The Daily Hopper (@daily_hopper) <a href="https://twitter.com/daily_hopper/status/1647583098694176768?ref_src=twsrc%5Etfw">April 16, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <button id="go" onclick="window.open('https://www.spacex.com/launches/mission/?missionId=starship-flight-test')">Go</button>
+    </div>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+</html>
